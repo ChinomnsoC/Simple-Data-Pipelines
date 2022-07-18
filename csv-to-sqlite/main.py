@@ -7,7 +7,7 @@ from sqlalchemy import String, Float
 
 class DownloadFranceSales(Task):
     def output(self):
-        return LocalTarget('My-First-Data-Pipeline/csv-to-sqlite/france.csv')
+        return LocalTarget('france.csv')
 
     def run(self):
         with self.output().open('w') as f:
@@ -17,7 +17,7 @@ class DownloadFranceSales(Task):
 
 class DownloadGermanySales(Task):
     def output(self):
-        return LocalTarget('My-First-Data-Pipeline/csv-to-sqlite/germany.csv')
+        return LocalTarget('germany.csv')
 
     def run(self):
         with self.output().open('w') as f:
@@ -25,12 +25,12 @@ class DownloadGermanySales(Task):
             print('June, 560', file=f)
 
 
-class CreateData(sqla.CopyToTable):
+class CreateDatab(sqla.CopyToTable):
     columns = [
         (["month", String(64)], {}),
         (["amount", Float], {})
     ]
-    connection_string = "sqlite:////test.db"  # in memory SQLite database
+    connection_string = "sqlite:///test.db"  # in memory SQLite database
     table = "sales"  # name of the table to store data
     column_separator = ','
 
@@ -53,4 +53,4 @@ class CreateData(sqla.CopyToTable):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    luigi.run(['CreateData', '--local-scheduler'])
+    luigi.run(['CreateDatab', '--local-scheduler'])
