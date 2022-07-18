@@ -1,6 +1,7 @@
 import luigi
 from luigi import Task, LocalTarget
 from luigi.contrib import sqla
+from pkg_resources import yield_lines
 from sqlalchemy import String, Float
 
 
@@ -24,7 +25,7 @@ class DownloadGermanySales(Task):
             print('June, 560', file=f)
 
 
-class CreateDatabase(sqla.CopyToTable):
+class CreateDatab(sqla.CopyToTable):
     columns = [
         (["month", String(64)], {}),
         (["amount", Float], {})
@@ -34,9 +35,12 @@ class CreateDatabase(sqla.CopyToTable):
     column_separator = ','
 
     def rows(self):
-        with self.input()
-        for row in [("item1", "property1"), ("item2", "property2")]:
-            yield row
+        with self.input()[0].open() as f:
+            for line in f:
+                yield line.split(self.column_separator)
+        with self.input()[1].open() as f:
+            for line in f:
+                yield line.split(self.column_separator)
 
     def requires(self):
         return [DownloadFranceSales(),
@@ -49,4 +53,4 @@ class CreateDatabase(sqla.CopyToTable):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    luigi.run(['CreateDatabase', '--local-scheduler'])
+    luigi.run(['CreateDatab', '--local-scheduler'])
