@@ -25,7 +25,7 @@ class DownloadGermanySales(Task):
             print('June, 560', file=f)
 
 
-class CreateDatab(sqla.CopyToTable):
+class CreateDatabase(sqla.CopyToTable):
     columns = [
         (["month", String(64)], {}),
         (["amount", Float], {})
@@ -53,4 +53,4 @@ class CreateDatab(sqla.CopyToTable):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    luigi.run(['CreateDatab', '--local-scheduler'])
+    luigi.run(['CreateDatabase', '--local-scheduler'])
