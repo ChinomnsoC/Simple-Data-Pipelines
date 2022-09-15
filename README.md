@@ -1,4 +1,4 @@
-# My-First-Data-Pipeline
+# Simple-Data-Pipelines
 
 Implementing a smart data pipeline with Luigi and Python.
 
