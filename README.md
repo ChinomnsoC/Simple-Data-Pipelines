@@ -1,17 +1,19 @@
-# My-First-Data-Pipeline
+# Simple-Data-Pipelines
 
 Implementing a smart data pipeline with Luigi and Python.
 
-## NAME OF FILE
+## sales-summaries
 
 #### Type of task:
 
-- Some text
+- Many parallel and successive tasks
 
 #### Description:
 
-- Creates a pipeline that...
-- The steps...
+- Creates a pipeline runs multiple parallel and successive tasks
+- The first task leads to two different tasks that run in parallel, with each task producing and output. These outputs are required to initiate the successive two tasks which also have outputs. The last outputs are then processed in a final wrapper task that produces a singular output.
+
+![Pipeline Diagram](sales-summaries/pipelineimage.jpg)
 
 ## parallel-downloads
 
